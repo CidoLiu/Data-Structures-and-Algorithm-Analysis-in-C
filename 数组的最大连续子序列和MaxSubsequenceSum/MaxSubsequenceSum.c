@@ -20,7 +20,7 @@ int main()
     return 0;
 }
 
-//算法1：时间复杂度O(n3)
+//算法1：时间复杂度O(n3)--暴力遍历
 int MaxSubsequenceSum1(int a[],int n) {
 
 	int thisSum, maxSum, i, j, k;
@@ -41,7 +41,7 @@ int MaxSubsequenceSum1(int a[],int n) {
 	return maxSum;
 }
 
-//算法2：时间复杂度O(n2)
+//算法2：时间复杂度O(n2)--暴力遍历
 int MaxSubsequenceSum2(int a[], int n) {
 
 	int thisSum, maxSum, i, j;
@@ -58,7 +58,7 @@ int MaxSubsequenceSum2(int a[], int n) {
 	return maxSum;
 }
 
-//算法3：时间复杂度为O(nlogn)
+//算法3：时间复杂度为O(nlogn)--递归 分治(divide-and-conquer)
 int MaxSubsequenceSum3(int a[], int n) {
 	return MaxSubSum(a, 0, n - 1);
 }
@@ -102,11 +102,12 @@ static int MaxSubSum(int a[], int left, int right) {
 		}
 	}
 
+	//max(maxLeftSum,maxRightSum,maxLeftBorderSum+maxRightBorderSum)
 	return (maxLeftSum > maxRightSum ? maxLeftSum : maxRightSum) > (maxLeftBorderSum + maxRightBorderSum) ?
 		(maxLeftSum > maxRightSum ? maxLeftSum : maxRightSum) : (maxLeftBorderSum + maxRightBorderSum);
 }
 
-//算法4：时间复杂度为O(n)
+//算法4：时间复杂度为O(n)--几乎是完美的算法（需要常量空间并以线性时间运行的联机算法）
 //联机算法，在任意时刻都能对他已经读入的数据给出子序列问题的正确答案
 int MaxSubsequenceSum4(int a[], int n) {
 	int thisSum, maxSum, i;
@@ -117,7 +118,7 @@ int MaxSubsequenceSum4(int a[], int n) {
 			maxSum = thisSum;
 		}
 		else if (thisSum < 0) {
-			thisSum = 0;
+			thisSum = 0;//负数在求和中永远是累赘，出现负数即跳过，置零重新开始
 		}
 	}
 	return maxSum;
