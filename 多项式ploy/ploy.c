@@ -16,6 +16,8 @@ Max( int A, int B )
     return A > B ? A : B;
 }
 
+#if 0
+
 /* START: fig3_18.txt */
         typedef struct
         {
@@ -74,21 +76,6 @@ Max( int A, int B )
         }
 /* END */
 
-#if 0
-/* START: fig3_23.txt */
-        typedef struct Node *PtrToNode;
-
-        struct Node
-        {
-            int Coefficient;
-            int Exponent;
-            PtrToNode Next;
-        };
-
-        typedef PtrToNode Polynomial;  /* Nodes sorted by exponent */
-/* END */
-#endif
-
 void
 PrintPoly( const Polynomial Q )
 {
@@ -114,3 +101,54 @@ int main( )
 
     return 0;
 }
+
+#endif // 0
+
+#if 1
+/* START: fig3_23.txt */
+        typedef struct Node *PtrToNode;
+
+        struct Node
+        {
+            int Coefficient;
+            int Exponent;
+            PtrToNode Next;
+        };
+
+        typedef PtrToNode Polynomial;  /* Nodes sorted by exponent */
+/* END */
+
+void initPloy(Polynomial P){
+    P = malloc( sizeof( *P ) );
+    P->Coefficient=0;
+    P->Exponent=0;
+    P->Next=NULL;
+}
+
+int isEmpty(Polynomial P){
+    return P->Coefficient==0;
+}
+
+//void addNode(Polynomial P,int confficient,int exponent){
+//    if(isEmpty(P)){
+//        P.Coefficient=confficient;
+//        P.Exponent=exponent;
+//        P.Next=NULL;
+//        return ;
+//    }
+//    Polynomial temp;
+//    temp=malloc(sizeof(struct Node));
+//
+//}
+
+int main(){
+    Polynomial P, Q;
+    //initPloy(P);
+    P = malloc( sizeof( *P ) );
+    P->Coefficient=0;
+    P->Exponent=0;
+    P->Next=NULL;
+    printf("%d\n",P->Coefficient);
+    return 0;
+}
+#endif
